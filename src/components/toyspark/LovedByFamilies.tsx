@@ -2,6 +2,8 @@ import { motion } from "motion/react";
 import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/context/cart-context";
+import { toast } from "sonner";
 
 // Real product images from categories
 import buildingBlocks from "@/assets/categories/building.jpg";
@@ -73,6 +75,20 @@ const POPULAR_PRODUCTS = [
 ];
 
 export function LovedByFamilies() {
+  const { addItem } = useCart();
+
+  const handleAddToCart = (product: typeof POPULAR_PRODUCTS[0]) => {
+    addItem({
+      id: product.id.toString(),
+      name: product.name,
+      description: product.category,
+      price: parseFloat(product.price.replace(/,/g, '')),
+      image: product.image,
+      rating: 5,
+    });
+    toast.success(`${product.name} added to cart!`);
+  };
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-background via-brand-pink/5 to-background py-16 md:py-24">
       {/* Decorative elements */}
@@ -211,6 +227,7 @@ export function LovedByFamilies() {
                       </span>
                       <Button
                         size="sm"
+                        onClick={() => handleAddToCart(product)}
                         className="h-8 rounded-full bg-gradient-to-r from-brand-pink-deep to-brand-orange px-3 text-xs text-white shadow-md hover:opacity-95 sm:h-9 sm:px-4"
                       >
                         <ShoppingCart className="mr-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
