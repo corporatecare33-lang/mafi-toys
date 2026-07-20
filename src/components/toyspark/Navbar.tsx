@@ -11,10 +11,10 @@ import { cn } from "@/lib/utils";
 import logo from "@/assets/mafi-toys-logo.png";
 
 const NAV = [
-  { id: "home", label: "Home" },
-  { id: "products", label: "Products" },
-  { id: "reviews", label: "Reviews" },
-  { id: "contact", label: "Contact" },
+  { id: "home", label: "Home", route: "/" },
+  { id: "products", label: "Products", route: "/products" },
+  { id: "about", label: "About", route: "/about" },
+  { id: "contact", label: "Contact", route: "/" },
 ];
 
 export function Navbar() {
@@ -65,21 +65,31 @@ export function Navbar() {
     return () => window.cancelAnimationFrame(frame);
   }, [pathname]);
 
-  const go = async (id: string) => {
+  const go = async (id: string, route: string) => {
     setMobileOpen(false);
 
-    if (pathname !== "/") {
-      await navigate({ to: "/", hash: id });
-      window.requestAnimationFrame(() => scrollToSection(id));
+    // If it's a different page route, navigate to that route
+    if (route !== "/") {
+      await navigate({ to: route as "/" | "/products" | "/about" });
       return;
     }
 
-    scrollToSection(id);
+    // If we're on home page and want to scroll to section
+    if (pathname === "/") {
+      scrollToSection(id);
+      return;
+    }
+
+    // Navigate to home page with hash
+    await navigate({ to: "/", hash: id });
+    window.requestAnimationFrame(() => scrollToSection(id));
   };
 
   const onSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    void go("products");
+    if (query.trim()) {
+      void navigate({ to: "/products" });
+    }
   };
 
   return (
@@ -96,7 +106,7 @@ export function Navbar() {
       <div className="mx-auto flex min-h-[68px] max-w-7xl items-center gap-2 px-4 py-2 sm:gap-3 md:min-h-0 md:px-6 md:py-4 xl:gap-4 xl:px-8">
         {/* Logo */}
         <button
-          onClick={() => void go("home")}
+          onClick={() => void go("home", "/")}
           className="flex shrink-0 items-center gap-2 transition-transform hover:scale-105"
           aria-label="Mafi Toys home"
         >
@@ -108,7 +118,7 @@ export function Navbar() {
           {NAV.map((n) => (
             <button
               key={n.id}
-              onClick={() => void go(n.id)}
+              onClick={() => void go(n.id, n.route)}
               className="group relative rounded-full px-4 py-2 text-sm font-bold text-foreground/80 transition-colors hover:text-brand-pink-deep"
             >
               {n.label}
@@ -169,7 +179,7 @@ export function Navbar() {
             )}
           </Link>
           <Button
-            onClick={() => void go("contact")}
+            onClick={() => void go("contact", "/")}
             className="hidden rounded-full bg-gradient-to-r from-brand-pink-deep via-brand-orange to-brand-red px-5 text-white shadow-toy transition hover:shadow-lg hover:brightness-105 min-[1100px]:inline-flex"
           >
             <Sparkles className="mr-1.5 h-4 w-4" /> Buy Now
@@ -208,14 +218,14 @@ export function Navbar() {
           {NAV.map((n) => (
             <button
               key={n.id}
-              onClick={() => void go(n.id)}
+              onClick={() => void go(n.id, n.route)}
               className="block w-full border-b border-border/60 px-3 py-3 text-left text-sm font-semibold transition-colors last:border-b-0 hover:bg-brand-pink/20 hover:text-brand-pink-deep md:rounded-lg md:border-b-0 md:text-base md:hover:bg-brand-pink/40"
             >
               {n.label}
             </button>
           ))}
           <Button
-            onClick={() => void go("contact")}
+            onClick={() => void go("contact", "/")}
             className="mt-3 w-full rounded-xl bg-gradient-to-r from-brand-pink-deep to-brand-orange text-white shadow-md md:mt-2 md:rounded-full"
           >
             Buy Now
