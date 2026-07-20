@@ -5,6 +5,7 @@ import { Navbar } from "@/components/toyspark/Navbar";
 import { Hero } from "@/components/toyspark/Hero";
 import { Categories } from "@/components/toyspark/Categories";
 import { Reviews } from "@/components/toyspark/Reviews";
+import { HotDeals } from "@/components/toyspark/HotDeals";
 import { Contact } from "@/components/toyspark/Contact";
 import { Footer } from "@/components/toyspark/Footer";
 import { ProductCard } from "@/components/toyspark/ProductCard";
@@ -85,6 +86,7 @@ function Index() {
         </section>
 
         <Reviews />
+        <HotDeals />
         <Contact />
       </main>
       <Footer />

@@ -85,6 +85,7 @@ export function LovedByFamilies() {
       price: parseFloat(product.price.replace(/,/g, '')),
       image: product.image,
       rating: 5,
+      category: product.category,
     });
     toast.success(`${product.name} added to cart!`);
   };
