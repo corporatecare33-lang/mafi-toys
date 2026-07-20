@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { useCart, type CartItem } from "@/context/cart-context";
 import { Navbar } from "@/components/toyspark/Navbar";
 import { Footer } from "@/components/toyspark/Footer";
-import logo from "@/assets/toy-shop-logo.png";
+import logo from "@/assets/toyshop_logo.jpg";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/order")({

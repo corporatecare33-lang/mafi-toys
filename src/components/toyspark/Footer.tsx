@@ -14,7 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { scrollToSection } from "@/lib/scroll";
-import logo from "@/assets/toy-shop-logo.png";
+import logo from "@/assets/toyshop_logo.jpg";
 
 const LINKS = [
   { id: "home", label: "Home" },

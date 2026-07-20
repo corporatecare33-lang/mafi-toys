@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Heart, Sparkles, Users, Shield, MapPin, Phone, Mail } from "lucide-react";
 import { Navbar } from "@/components/toyspark/Navbar";
 import { Footer } from "@/components/toyspark/Footer";
-import logo from "@/assets/toy-shop-logo.png";
+import logo from "@/assets/toyshop_logo.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

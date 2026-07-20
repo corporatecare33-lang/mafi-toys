@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import logo from "../assets/toy-shop-logo.png";
+import logo from "../assets/toyshop_logo.jpg";
 import { CartProvider } from "@/context/cart-context";
 import { SearchProvider } from "@/context/search-context";
 import { Toaster } from "@/components/ui/sonner";
@@ -98,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: logo },
     ],
     links: [
-      { rel: "icon", type: "image/png", href: logo },
+      { rel: "icon", type: "image/jpeg", href: logo },
       { rel: "apple-touch-icon", href: logo },
       {
         rel: "stylesheet",

@@ -8,7 +8,7 @@ import { useCart } from "@/context/cart-context";
 import { useSearch } from "@/context/search-context";
 import { scrollToSection } from "@/lib/scroll";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/toy-shop-logo.png";
+import logo from "@/assets/toyshop_logo.jpg";
 import { PRODUCTS } from "./products-data";
 import type { Product } from "@/context/cart-context";
 
