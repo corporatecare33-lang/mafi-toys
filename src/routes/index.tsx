@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/toyspark/Navbar";
 import { Hero } from "@/components/toyspark/Hero";
 import { Categories } from "@/components/toyspark/Categories";
-import { LovedByFamilies } from "@/components/toyspark/LovedByFamilies";
 import { Reviews } from "@/components/toyspark/Reviews";
 import { Contact } from "@/components/toyspark/Contact";
 import { Footer } from "@/components/toyspark/Footer";
@@ -26,7 +25,6 @@ function Index() {
       <main>
         <Hero />
         <Categories />
-        <LovedByFamilies />
 
         {/* Featured Products Section */}
         <section id="products" className="relative py-14 sm:py-20 md:py-24 lg:py-28">

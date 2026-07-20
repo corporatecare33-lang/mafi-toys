@@ -14,6 +14,7 @@ export const PRODUCTS: Product[] = [
     price: 24.99,
     image: teddy,
     rating: 5,
+    category: "Plush Toys",
   },
   {
     id: "p2",
@@ -22,6 +23,7 @@ export const PRODUCTS: Product[] = [
     price: 34.99,
     image: doll,
     rating: 5,
+    category: "Dolls",
   },
   {
     id: "p3",
@@ -30,6 +32,7 @@ export const PRODUCTS: Product[] = [
     price: 22.5,
     image: unicorn,
     rating: 5,
+    category: "Plush Toys",
   },
   {
     id: "p4",
@@ -38,6 +41,7 @@ export const PRODUCTS: Product[] = [
     price: 19.99,
     image: fashionDoll,
     rating: 4,
+    category: "Dolls",
   },
   {
     id: "p5",
@@ -46,6 +50,7 @@ export const PRODUCTS: Product[] = [
     price: 18.0,
     image: bunny,
     rating: 5,
+    category: "Plush Toys",
   },
   {
     id: "p6",
@@ -54,5 +59,6 @@ export const PRODUCTS: Product[] = [
     price: 49.99,
     image: kitchen,
     rating: 5,
+    category: "Educational",
   },
 ];

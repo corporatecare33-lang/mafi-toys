@@ -7,6 +7,7 @@ export type Product = {
   price: number;
   image: string;
   rating: number;
+  category: string;
 };
 
 export type CartItem = Product & { quantity: number };
