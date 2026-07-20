@@ -338,11 +338,64 @@ export function Navbar() {
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground/50" />
               <Input
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelectedIndex(-1);
+                }}
+                onKeyDown={handleKeyDown}
+                onFocus={() => {
+                  if (suggestions.length > 0) {
+                    setShowSuggestions(true);
+                  }
+                }}
                 placeholder="Search toys..."
                 className="h-11 w-full rounded-xl border-brand-pink/40 bg-brand-pink/5 pl-9 shadow-none"
                 aria-label="Search products"
+                autoComplete="off"
               />
+              
+              {/* Mobile Suggestions */}
+              <AnimatePresence>
+                {showSuggestions && suggestions.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 right-0 mt-2 rounded-xl bg-white shadow-xl ring-1 ring-brand-pink/20 overflow-hidden z-50 max-h-[300px] overflow-y-auto"
+                  >
+                    {suggestions.map((product, index) => (
+                      <button
+                        key={product.id}
+                        onClick={() => {
+                          handleSuggestionClick(product);
+                          setMobileOpen(false);
+                        }}
+                        className={cn(
+                          "w-full flex items-center gap-3 p-3 transition-colors text-left border-b border-brand-pink/10 last:border-b-0",
+                          selectedIndex === index
+                            ? "bg-gradient-to-r from-brand-pink/20 to-brand-orange/20"
+                            : "hover:bg-brand-pink/10"
+                        )}
+                      >
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="h-10 w-10 rounded-lg object-cover shadow-sm"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-sm text-foreground truncate">
+                            {product.name}
+                          </p>
+                          <p className="text-xs text-foreground/60 truncate">
+                            {product.category} • ${product.price}
+                          </p>
+                        </div>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </form>
           {NAV.map((n) => (
