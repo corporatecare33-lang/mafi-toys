@@ -33,6 +33,29 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
+    const navbar = document.querySelector<HTMLElement>("[data-site-navbar]");
+    if (!navbar) return;
+
+    const updateNavbarHeight = () => {
+      if (mobileOpen) return;
+      document.documentElement.style.setProperty(
+        "--site-navbar-height",
+        `${navbar.getBoundingClientRect().height}px`,
+      );
+    };
+
+    updateNavbarHeight();
+    const observer = new ResizeObserver(updateNavbarHeight);
+    observer.observe(navbar);
+    window.addEventListener("resize", updateNavbarHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateNavbarHeight);
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
     if (pathname !== "/") return;
 
     const id = window.location.hash.slice(1);

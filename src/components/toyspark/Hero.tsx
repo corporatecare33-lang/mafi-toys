@@ -21,7 +21,11 @@ export function Hero() {
   const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }));
 
   return (
-    <section id="home" className="relative w-full pt-[72px] md:pt-[118px] xl:pt-[126px]">
+    <section
+      id="home"
+      className="relative w-full"
+      style={{ paddingTop: "var(--site-navbar-height, 72px)" }}
+    >
       <Carousel plugins={[autoplay.current]} opts={{ loop: true }} className="w-full">
         <CarouselContent>
           {SLIDES.map((src, i) => (

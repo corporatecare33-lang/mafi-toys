@@ -73,6 +73,7 @@
 
 :root {
   --radius: 0.625rem;
+  --site-navbar-height: 72px;
   --background: oklch(0.995 0.005 340);
   --foreground: oklch(0.18 0.02 340);
   --card: oklch(1 0 0);
