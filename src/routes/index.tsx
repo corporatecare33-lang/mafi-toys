@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/toyspark/Navbar";
 import { Hero } from "@/components/toyspark/Hero";
 import { Categories } from "@/components/toyspark/Categories";
+import { LovedByFamilies } from "@/components/toyspark/LovedByFamilies";
 import { Reviews } from "@/components/toyspark/Reviews";
 import { Contact } from "@/components/toyspark/Contact";
 import { Footer } from "@/components/toyspark/Footer";
@@ -25,6 +26,7 @@ function Index() {
       <main>
         <Hero />
         <Categories />
+        <LovedByFamilies />
 
         {/* Featured Products Section */}
         <section id="products" className="relative py-14 sm:py-20 md:py-24 lg:py-28">
@@ -36,8 +38,10 @@ function Index() {
               transition={{ duration: 0.5 }}
               className="mx-auto max-w-2xl text-center"
             >
-              <span className="inline-block rounded-full bg-brand-pink/60 px-4 py-1 text-xs font-bold uppercase tracking-wider text-brand-pink-deep">
+              <span className="inline-flex items-center gap-2 rounded-full border border-brand-pink/30 bg-white/90 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-brand-pink-deep shadow-sm backdrop-blur">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-pink-deep" />
                 Our Collection
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-pink-deep" />
               </span>
               <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl md:text-5xl">
                 Featured <span className="gradient-text">Toys</span>
