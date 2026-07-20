@@ -26,6 +26,10 @@ export function Navbar() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [suggestions, setSuggestions] = useState<Product[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -56,6 +60,43 @@ export function Navbar() {
       window.removeEventListener("resize", updateNavbarHeight);
     };
   }, [mobileOpen]);
+
+  // AJAX search suggestion
+  useEffect(() => {
+    const trimmed = query.trim().toLowerCase();
+    
+    if (trimmed.length === 0) {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    // Simulate AJAX delay
+    const timer = setTimeout(() => {
+      const filtered = PRODUCTS.filter((product) => 
+        product.name.toLowerCase().includes(trimmed) ||
+        product.description.toLowerCase().includes(trimmed) ||
+        product.category.toLowerCase().includes(trimmed)
+      ).slice(0, 5); // Show max 5 suggestions
+
+      setSuggestions(filtered);
+      setShowSuggestions(filtered.length > 0);
+    }, 300); // 300ms debounce
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -90,7 +131,41 @@ export function Navbar() {
   const onSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
+      setShowSuggestions(false);
       void navigate({ to: "/products" });
+    }
+  };
+
+  const handleSuggestionClick = (product: Product) => {
+    setQuery(product.name);
+    setShowSuggestions(false);
+    void navigate({ to: "/products" });
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!showSuggestions || suggestions.length === 0) return;
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setSelectedIndex((prev) => 
+          prev < suggestions.length - 1 ? prev + 1 : prev
+        );
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+        break;
+      case "Enter":
+        if (selectedIndex >= 0) {
+          e.preventDefault();
+          handleSuggestionClick(suggestions[selectedIndex]);
+        }
+        break;
+      case "Escape":
+        setShowSuggestions(false);
+        setSelectedIndex(-1);
+        break;
     }
   };
 
@@ -131,16 +206,26 @@ export function Navbar() {
 
         {/* Search */}
         <form onSubmit={onSearchSubmit} className="hidden min-w-0 flex-1 md:flex" role="search">
-          <div className="group relative w-full max-w-lg mx-auto">
+          <div ref={searchRef} className="group relative w-full max-w-lg mx-auto">
             <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-brand-pink-deep via-brand-orange to-brand-red opacity-60 blur-md transition duration-300 group-focus-within:opacity-100 group-hover:opacity-90" />
             <div className="relative flex items-center rounded-full bg-white p-1 pl-5 shadow-lg ring-1 ring-brand-pink/40">
               <Search className="mr-2 h-4 w-4 text-brand-pink-deep" />
               <Input
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelectedIndex(-1);
+                }}
+                onKeyDown={handleKeyDown}
+                onFocus={() => {
+                  if (suggestions.length > 0) {
+                    setShowSuggestions(true);
+                  }
+                }}
                 placeholder="Search magical toys..."
                 className="h-9 border-0 bg-transparent px-0 text-sm shadow-none focus-visible:ring-0"
                 aria-label="Search products"
+                autoComplete="off"
               />
               <Button
                 type="submit"
@@ -151,6 +236,49 @@ export function Navbar() {
                 <span className="hidden md:inline">Search</span>
               </Button>
             </div>
+
+            {/* Suggestions Dropdown */}
+            <AnimatePresence>
+              {showSuggestions && suggestions.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full left-0 right-0 mt-2 rounded-2xl bg-white shadow-2xl ring-1 ring-brand-pink/30 overflow-hidden z-50"
+                >
+                  <div className="p-2">
+                    {suggestions.map((product, index) => (
+                      <button
+                        key={product.id}
+                        onClick={() => handleSuggestionClick(product)}
+                        className={cn(
+                          "w-full flex items-center gap-3 p-3 rounded-xl transition-colors text-left",
+                          selectedIndex === index
+                            ? "bg-gradient-to-r from-brand-pink/20 to-brand-orange/20"
+                            : "hover:bg-brand-pink/10"
+                        )}
+                      >
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="h-12 w-12 rounded-lg object-cover shadow-sm"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-sm text-foreground truncate">
+                            {product.name}
+                          </p>
+                          <p className="text-xs text-foreground/60 truncate">
+                            {product.category} • ${product.price}
+                          </p>
+                        </div>
+                        <Search className="h-4 w-4 text-brand-pink-deep opacity-50" />
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </form>
 
