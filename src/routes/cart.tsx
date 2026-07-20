@@ -19,9 +19,9 @@ import { Footer } from "@/components/toyspark/Footer";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Cart — Mafi Toys" },
+      { title: "Your Cart — Toy Shop" },
       { name: "description", content: "Review the magical toys in your cart before checkout." },
-      { property: "og:title", content: "Your Cart — Mafi Toys" },
+      { property: "og:title", content: "Your Cart — Toy Shop" },
       {
         property: "og:description",
         content: "Review the magical toys in your cart before checkout.",

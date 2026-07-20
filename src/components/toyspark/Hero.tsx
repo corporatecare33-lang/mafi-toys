@@ -26,10 +26,13 @@ export function Hero() {
         <CarouselContent>
           {SLIDES.map((src, i) => (
             <CarouselItem key={i}>
+              {/* Mobile: natural ratio so the full banner is visible (no cropping).
+                  md+: fixed viewport height with cover for a full-bleed look. */}
               <img
                 src={src}
                 alt={`Banner ${i + 1}`}
-                className="aspect-[4/3] w-full object-cover sm:aspect-[16/9] md:aspect-auto md:h-[60vh] lg:h-[70vh] xl:h-[85vh]"
+                loading={i === 0 ? "eager" : "lazy"}
+                className="h-auto w-full object-contain md:h-[60vh] md:object-cover lg:h-[70vh] xl:h-[85vh]"
               />
             </CarouselItem>
           ))}

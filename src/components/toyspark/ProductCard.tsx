@@ -1,6 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Star, ShoppingCart, Eye } from "lucide-react";
+import { Star, ShoppingCart, Eye, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useCart, type Product } from "@/context/cart-context";
@@ -9,9 +10,18 @@ export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
   const navigate = useNavigate();
 
+  const [added, setAdded] = useState(false);
+  const [buying, setBuying] = useState(false);
+  const addedTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  useEffect(() => () => clearTimeout(addedTimer.current), []);
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     addItem(product);
+    setAdded(true);
+    clearTimeout(addedTimer.current);
+    addedTimer.current = setTimeout(() => setAdded(false), 1500);
     toast.success(`${product.name} added to cart`, {
       description: `$${product.price.toFixed(2)}`,
     });
@@ -19,6 +29,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   const handleBuyNow = (e: React.MouseEvent) => {
     e.preventDefault();
+    setBuying(true);
     addItem(product);
     navigate({ to: "/cart" });
   };
@@ -77,16 +88,37 @@ export function ProductCard({ product }: { product: Product }) {
           <Button
             onClick={handleAddToCart}
             variant="outline"
-            className="flex-1 rounded-full border-2 border-brand-pink-deep text-brand-pink-deep hover:bg-brand-pink/20"
+            className={`flex-1 rounded-full border-2 font-semibold transition-all duration-150 active:scale-95 ${
+              added
+                ? "scale-105 border-brand-pink-deep bg-brand-pink-deep text-white shadow-md hover:bg-brand-pink-deep hover:text-white"
+                : "border-brand-pink-deep bg-white text-brand-pink-deep hover:bg-brand-pink/20 hover:text-brand-pink-deep"
+            }`}
           >
-            <ShoppingCart className="mr-1 h-4 w-4" />
-            Add
+            {added ? (
+              <>
+                <Check className="mr-1 h-4 w-4" />
+                Added!
+              </>
+            ) : (
+              <>
+                <ShoppingCart className="mr-1 h-4 w-4" />
+                Add
+              </>
+            )}
           </Button>
           <Button
             onClick={handleBuyNow}
-            className="flex-1 rounded-full bg-gradient-to-r from-brand-pink-deep to-brand-orange text-white shadow-md hover:opacity-95"
+            disabled={buying}
+            className="flex-1 rounded-full bg-gradient-to-r from-brand-pink-deep to-brand-orange text-white shadow-md transition-all duration-150 hover:opacity-95 active:scale-95 disabled:opacity-100"
           >
-            Buy Now
+            {buying ? (
+              <>
+                <Loader2 className="mr-1 h-4 w-4 animate-spin" />
+                Going...
+              </>
+            ) : (
+              "Buy Now"
+            )}
           </Button>
         </div>
       </div>

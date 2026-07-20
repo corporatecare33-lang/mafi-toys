@@ -8,6 +8,8 @@ export type Product = {
   image: string;
   rating: number;
   category: string;
+  /** Home-page collection this product belongs to (e.g. "trending", "drones"). */
+  collection?: string;
 };
 
 export type CartItem = Product & { quantity: number };

@@ -9,7 +9,8 @@ import { HotDeals } from "@/components/toyspark/HotDeals";
 import { Contact } from "@/components/toyspark/Contact";
 import { Footer } from "@/components/toyspark/Footer";
 import { ProductCard } from "@/components/toyspark/ProductCard";
-import { PRODUCTS } from "@/components/toyspark/products-data";
+import { ToySection } from "@/components/toyspark/ToySection";
+import { PRODUCTS, COLLECTIONS } from "@/components/toyspark/products-data";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -17,8 +18,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  // Show only first 6 featured products on home page
-  const featuredProducts = PRODUCTS.slice(0, 6);
+  // Show only first 8 featured products on home page (two rows of four)
+  const featuredProducts = PRODUCTS.slice(0, 8);
 
   return (
     <div className="min-h-screen bg-background font-body text-foreground">
@@ -50,7 +51,7 @@ function Index() {
               </p>
             </motion.div>
 
-            <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
               {featuredProducts.map((p, i) => (
                 <motion.div
                   key={p.id}
@@ -84,6 +85,11 @@ function Index() {
             </motion.div>
           </div>
         </section>
+
+        {/* Curated collections — 4 picks each, "View All" opens the filtered list */}
+        {COLLECTIONS.map((c) => (
+          <ToySection key={c.slug} collection={c} />
+        ))}
 
         <Reviews />
         <HotDeals />

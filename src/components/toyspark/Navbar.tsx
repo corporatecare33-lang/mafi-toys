@@ -8,7 +8,7 @@ import { useCart } from "@/context/cart-context";
 import { useSearch } from "@/context/search-context";
 import { scrollToSection } from "@/lib/scroll";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/mafi-toys-logo.png";
+import logo from "@/assets/toy-shop-logo.png";
 import { PRODUCTS } from "./products-data";
 import type { Product } from "@/context/cart-context";
 
@@ -185,9 +185,9 @@ export function Navbar() {
         <button
           onClick={() => void go("home", "/")}
           className="flex shrink-0 items-center gap-2 transition-transform hover:scale-105"
-          aria-label="Mafi Toys home"
+          aria-label="Toy Shop home"
         >
-          <img src={logo} alt="Mafi Toys" className="h-12 w-auto object-contain md:h-14 xl:h-16" />
+          <img src={logo} alt="Toy Shop" className="h-12 w-auto object-contain md:h-14 xl:h-16" />
         </button>
 
         {/* Nav pills */}

@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import logo from "../assets/mafi-toys-logo.png";
+import logo from "../assets/toy-shop-logo.png";
 import { CartProvider } from "@/context/cart-context";
 import { SearchProvider } from "@/context/search-context";
 import { Toaster } from "@/components/ui/sonner";
@@ -76,20 +76,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Mafi Toys" },
+      { title: "Toy Shop" },
       {
         name: "description",
         content: "A modern, colorful one-page eCommerce landing page for girls' toys.",
       },
-      { name: "author", content: "Mafi Toys" },
-      { property: "og:title", content: "Mafi Toys" },
+      { name: "author", content: "Toy Shop" },
+      { property: "og:title", content: "Toy Shop" },
       {
         property: "og:description",
         content: "A modern, colorful one-page eCommerce landing page for girls' toys.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Mafi Toys" },
+      { name: "twitter:title", content: "Toy Shop" },
       {
         name: "twitter:description",
         content: "A modern, colorful one-page eCommerce landing page for girls' toys.",

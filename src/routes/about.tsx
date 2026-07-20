@@ -3,17 +3,17 @@ import { motion } from "motion/react";
 import { Heart, Sparkles, Users, Shield, MapPin, Phone, Mail } from "lucide-react";
 import { Navbar } from "@/components/toyspark/Navbar";
 import { Footer } from "@/components/toyspark/Footer";
-import logo from "@/assets/mafi-toys-logo.png";
+import logo from "@/assets/toy-shop-logo.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us — Mafi Toys" },
-      { name: "description", content: "Learn about Mafi Toys - Every Children's First Choice" },
-      { property: "og:title", content: "About Us — Mafi Toys" },
+      { title: "About Us — Toy Shop" },
+      { name: "description", content: "Learn about Toy Shop - Every Children's First Choice" },
+      { property: "og:title", content: "About Us — Toy Shop" },
       {
         property: "og:description",
-        content: "Learn about Mafi Toys - Every Children's First Choice",
+        content: "Learn about Toy Shop - Every Children's First Choice",
       },
     ],
   }),
@@ -36,7 +36,7 @@ function AboutPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
               src={logo}
-              alt="Mafi Toys"
+              alt="Toy Shop"
               className="mx-auto mb-6 h-32 w-auto object-contain"
             />
             <motion.h1
@@ -45,7 +45,7 @@ function AboutPage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="font-display text-4xl font-bold sm:text-5xl md:text-6xl"
             >
-              About <span className="gradient-text">Mafi Toys</span>
+              About <span className="gradient-text">Toy Shop</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -76,7 +76,7 @@ function AboutPage() {
               </div>
               <div className="space-y-4 text-foreground/80">
                 <p>
-                  Mafi Toys was founded with a simple mission: to bring joy and magic into the lives
+                  Toy Shop was founded with a simple mission: to bring joy and magic into the lives
                   of children through high-quality, safe, and delightful toys. We believe every child
                   deserves toys that spark imagination, encourage creativity, and create lasting
                   memories.
@@ -108,7 +108,7 @@ function AboutPage() {
               <h2 className="font-display text-3xl font-bold sm:text-4xl">
                 Why Choose <span className="gradient-text">Us?</span>
               </h2>
-              <p className="mt-3 text-foreground/70">What makes Mafi Toys special</p>
+              <p className="mt-3 text-foreground/70">What makes Toy Shop special</p>
             </motion.div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -148,7 +148,7 @@ function AboutPage() {
               <div className="grid gap-6 md:grid-cols-3">
                 <ContactItem icon={MapPin} title="Visit Us" content="Bashundhara City, Level-1, Block-C, Shop-77, Dhaka" />
                 <ContactItem icon={Phone} title="Call Us" content="01781-984427" />
-                <ContactItem icon={Mail} title="Email Us" content="info@mafitoys.com" />
+                <ContactItem icon={Mail} title="Email Us" content="info@toyshop.com" />
               </div>
             </motion.div>
           </div>

@@ -1,19 +1,21 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Heart } from "lucide-react";
 import { useState } from "react";
 import { Navbar } from "@/components/toyspark/Navbar";
 import { Footer } from "@/components/toyspark/Footer";
 import { ProductCard } from "@/components/toyspark/ProductCard";
-import { PRODUCTS } from "@/components/toyspark/products-data";
+import { PRODUCTS, COLLECTIONS } from "@/components/toyspark/products-data";
 import { useSearch } from "@/context/search-context";
 
 export const Route = createFileRoute("/products")({
+  validateSearch: (search: Record<string, unknown>): { collection?: string } =>
+    typeof search.collection === "string" ? { collection: search.collection } : {},
   head: () => ({
     meta: [
-      { title: "All Products — Mafi Toys" },
+      { title: "All Products — Toy Shop" },
       { name: "description", content: "Browse our complete collection of magical toys for girls." },
-      { property: "og:title", content: "All Products — Mafi Toys" },
+      { property: "og:title", content: "All Products — Toy Shop" },
       {
         property: "og:description",
         content: "Browse our complete collection of magical toys for girls.",
@@ -27,6 +29,8 @@ type PriceRange = "all" | "under20" | "20-40" | "40plus";
 
 function ProductsPage() {
   const { query } = useSearch();
+  const { collection } = Route.useSearch();
+  const activeCollection = COLLECTIONS.find((c) => c.slug === collection);
   const [selectedPriceRange, setSelectedPriceRange] = useState<PriceRange>("all");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
@@ -43,13 +47,18 @@ function ProductsPage() {
     }
   };
 
+  // Narrow to a home-page collection when one was requested
+  const base = activeCollection
+    ? PRODUCTS.filter((p) => p.collection === activeCollection.slug)
+    : PRODUCTS;
+
   // Filter by search query
   const q = query.trim().toLowerCase();
   let filtered = q
-    ? PRODUCTS.filter(
+    ? base.filter(
         (p) => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q),
       )
-    : [...PRODUCTS];
+    : [...base];
 
   // Filter by price range - convert USD prices to BDT (1 USD ≈ 120 BDT)
   if (selectedPriceRange === "under20") {
@@ -88,15 +97,27 @@ function ProductsPage() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-brand-pink/30 bg-white/90 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-pink-deep shadow-sm backdrop-blur">
               <Heart className="h-4 w-4 fill-current" />
-              Loved By Families
+              {activeCollection ? activeCollection.eyebrow : "Loved By Families"}
               <Heart className="h-4 w-4 fill-current" />
             </span>
             <h1 className="mt-5 font-display text-4xl font-bold sm:text-5xl md:text-6xl">
-              All <span className="gradient-text">Products</span>
+              {activeCollection ? activeCollection.title : "All"}{" "}
+              <span className="gradient-text">
+                {activeCollection ? activeCollection.highlight : "Products"}
+              </span>
             </h1>
             <p className="mt-3 text-base text-foreground/70 md:text-lg">
               {filtered.length} magical {filtered.length === 1 ? "toy" : "toys"} for your little one
             </p>
+            {activeCollection && (
+              <Link
+                to="/products"
+                search={{ collection: undefined }}
+                className="mt-3 inline-block text-sm font-semibold text-brand-pink-deep underline-offset-4 hover:underline"
+              >
+                ← Browse all products
+              </Link>
+            )}
           </motion.div>
 
           {/* Layout with Sidebar */}

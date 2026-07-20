@@ -5,6 +5,18 @@ import unicorn from "@/assets/toy-unicorn.jpg";
 import fashionDoll from "@/assets/toy-fashion-doll.jpg";
 import bunny from "@/assets/toy-bunny.jpg";
 import kitchen from "@/assets/toy-kitchen.jpg";
+import action from "@/assets/categories/action.jpg";
+import animals from "@/assets/categories/animals.jpg";
+import art from "@/assets/categories/art.jpg";
+import baby from "@/assets/categories/baby.jpg";
+import beach from "@/assets/categories/beach.jpg";
+import building from "@/assets/categories/building.jpg";
+import dollsCat from "@/assets/categories/dolls.jpg";
+import educational from "@/assets/categories/educational.jpg";
+import musical from "@/assets/categories/musical.jpg";
+import plush from "@/assets/categories/plush.jpg";
+import sports from "@/assets/categories/sports.jpg";
+import vehicles from "@/assets/categories/vehicles.jpg";
 
 export const PRODUCTS: Product[] = [
   {
@@ -61,4 +73,444 @@ export const PRODUCTS: Product[] = [
     rating: 5,
     category: "Educational",
   },
+  {
+    id: "p7",
+    name: "Rainbow Building Blocks",
+    description: "Colourful stacking blocks that spark endless creations.",
+    price: 29.99,
+    image: building,
+    rating: 5,
+    category: "Building Blocks",
+  },
+  {
+    id: "p8",
+    name: "Mini Racer Cars",
+    description: "A set of zippy die-cast cars ready for the race track.",
+    price: 16.5,
+    image: vehicles,
+    rating: 4,
+    category: "Vehicles",
+  },
+  {
+    id: "p9",
+    name: "STEM Discovery Kit",
+    description: "Hands-on science puzzles that make learning playful.",
+    price: 42.0,
+    image: educational,
+    rating: 5,
+    category: "Educational",
+  },
+  {
+    id: "p10",
+    name: "Dollhouse Family Set",
+    description: "A charming dollhouse with a sweet little family inside.",
+    price: 54.99,
+    image: dollsCat,
+    rating: 5,
+    category: "Dolls",
+  },
+  {
+    id: "p11",
+    name: "Soft Cuddle Friends",
+    description: "A basket of huggable plush pals in pastel shades.",
+    price: 21.0,
+    image: plush,
+    rating: 5,
+    category: "Plush Toys",
+  },
+  {
+    id: "p12",
+    name: "Little Musician Set",
+    description: "Tiny instruments for big first concerts at home.",
+    price: 27.5,
+    image: musical,
+    rating: 4,
+    category: "Educational",
+  },
+  {
+    id: "p13",
+    name: "Hero Action Figures",
+    description: "Poseable heroes ready for daring rescue missions.",
+    price: 23.99,
+    image: action,
+    rating: 4,
+    category: "Action Figures",
+  },
+  {
+    id: "p14",
+    name: "Jungle Animal Friends",
+    description: "A gentle herd of animal figures for imaginative safaris.",
+    price: 18.99,
+    image: animals,
+    rating: 5,
+    category: "Animals",
+  },
+  {
+    id: "p15",
+    name: "Creative Art Studio",
+    description: "Crayons, paints and paper for messy, happy afternoons.",
+    price: 32.0,
+    image: art,
+    rating: 5,
+    category: "Educational",
+  },
+  {
+    id: "p16",
+    name: "Baby First Toys",
+    description: "Soft rattles and teethers made for the tiniest hands.",
+    price: 14.99,
+    image: baby,
+    rating: 5,
+    category: "Baby & Toddler",
+  },
+  {
+    id: "p17",
+    name: "Beach Play Bucket",
+    description: "Bucket, spade and moulds for perfect sandcastles.",
+    price: 12.5,
+    image: beach,
+    rating: 4,
+    category: "Beach & Water",
+  },
+  {
+    id: "p18",
+    name: "Outdoor Sports Pack",
+    description: "Balls and rackets to keep little ones moving outside.",
+    price: 45.0,
+    image: sports,
+    rating: 4,
+    category: "Sports & Outdoor",
+  },
+
+  /* ---------------- Trending Toys ---------------- */
+  {
+    id: "p19",
+    name: "Glow Star Projector",
+    description: "Fills the room with drifting stars at bedtime.",
+    price: 26.99,
+    image: educational,
+    rating: 5,
+    category: "Educational",
+    collection: "trending",
+  },
+  {
+    id: "p20",
+    name: "Bubble Pop Fidget",
+    description: "Endless satisfying pops in rainbow silicone.",
+    price: 9.99,
+    image: art,
+    rating: 5,
+    category: "Educational",
+    collection: "trending",
+  },
+  {
+    id: "p21",
+    name: "Squishy Surprise Pack",
+    description: "Six slow-rise squishies hidden in mystery pouches.",
+    price: 15.5,
+    image: plush,
+    rating: 4,
+    category: "Plush Toys",
+    collection: "trending",
+  },
+  {
+    id: "p22",
+    name: "Magnetic Tile Castle",
+    description: "Click-together tiles for towers that really stand up.",
+    price: 39.99,
+    image: building,
+    rating: 5,
+    category: "Building Blocks",
+    collection: "trending",
+  },
+  {
+    id: "p23",
+    name: "Rainbow Slime Lab",
+    description: "Mix, stretch and glitter your own slime batches.",
+    price: 18.75,
+    image: art,
+    rating: 4,
+    category: "Educational",
+    collection: "trending",
+  },
+  {
+    id: "p24",
+    name: "Pop-Up Play Tent",
+    description: "A cosy hideaway that folds flat in seconds.",
+    price: 34.0,
+    image: beach,
+    rating: 5,
+    category: "Beach & Water",
+    collection: "trending",
+  },
+
+  /* ---------------- Drone Zone ---------------- */
+  {
+    id: "p25",
+    name: "Mini Sky Drone",
+    description: "Palm-sized quadcopter with one-touch take-off.",
+    price: 49.99,
+    image: vehicles,
+    rating: 5,
+    category: "Vehicles",
+    collection: "drones",
+  },
+  {
+    id: "p26",
+    name: "Camera Scout Drone",
+    description: "Live HD view straight to your phone screen.",
+    price: 89.99,
+    image: action,
+    rating: 5,
+    category: "Vehicles",
+    collection: "drones",
+  },
+  {
+    id: "p27",
+    name: "Stunt Flip Drone",
+    description: "360° barrel rolls at the tap of a button.",
+    price: 59.5,
+    image: sports,
+    rating: 4,
+    category: "Vehicles",
+    collection: "drones",
+  },
+  {
+    id: "p28",
+    name: "Glow Racing Drone",
+    description: "LED arms that light up the whole flight path.",
+    price: 64.0,
+    image: educational,
+    rating: 4,
+    category: "Vehicles",
+    collection: "drones",
+  },
+  {
+    id: "p29",
+    name: "Hand-Control Flyer",
+    description: "Hovers and follows your hand — no remote needed.",
+    price: 29.99,
+    image: musical,
+    rating: 4,
+    category: "Vehicles",
+    collection: "drones",
+  },
+
+  /* ---------------- Car Mania ---------------- */
+  {
+    id: "p30",
+    name: "Turbo Race Track",
+    description: "Loop-the-loop track with two turbo boosters.",
+    price: 44.99,
+    image: vehicles,
+    rating: 5,
+    category: "Vehicles",
+    collection: "cars",
+  },
+  {
+    id: "p31",
+    name: "Remote Rally Car",
+    description: "Grippy tyres built for carpet and pavement alike.",
+    price: 38.0,
+    image: action,
+    rating: 5,
+    category: "Vehicles",
+    collection: "cars",
+  },
+  {
+    id: "p32",
+    name: "Monster Truck Duo",
+    description: "Two chunky trucks that climb over anything.",
+    price: 27.5,
+    image: sports,
+    rating: 4,
+    category: "Vehicles",
+    collection: "cars",
+  },
+  {
+    id: "p33",
+    name: "Die-Cast Classics Set",
+    description: "Five collectible metal cars with opening doors.",
+    price: 22.99,
+    image: building,
+    rating: 5,
+    category: "Vehicles",
+    collection: "cars",
+  },
+  {
+    id: "p34",
+    name: "City Garage Playset",
+    description: "Ramps, a lift and a petrol pump for busy drivers.",
+    price: 52.0,
+    image: educational,
+    rating: 5,
+    category: "Vehicles",
+    collection: "cars",
+  },
+
+  /* ---------------- Little Princess ---------------- */
+  {
+    id: "p35",
+    name: "Royal Tiara Set",
+    description: "Sparkling tiara, wand and gloves for grand entrances.",
+    price: 19.99,
+    image: doll,
+    rating: 5,
+    category: "Dolls",
+    collection: "princess",
+  },
+  {
+    id: "p36",
+    name: "Ballgown Dress-Up Kit",
+    description: "A twirl-worthy gown with satin ribbon ties.",
+    price: 42.5,
+    image: fashionDoll,
+    rating: 5,
+    category: "Dolls",
+    collection: "princess",
+  },
+  {
+    id: "p37",
+    name: "Princess Castle House",
+    description: "Turrets, a balcony and tiny furniture inside.",
+    price: 68.0,
+    image: dollsCat,
+    rating: 5,
+    category: "Dolls",
+    collection: "princess",
+  },
+  {
+    id: "p38",
+    name: "Enchanted Tea Party",
+    description: "Rose-print cups and saucers for royal guests.",
+    price: 24.0,
+    image: kitchen,
+    rating: 4,
+    category: "Dolls",
+    collection: "princess",
+  },
+  {
+    id: "p39",
+    name: "Unicorn Carriage",
+    description: "A pastel carriage pulled by a glittering unicorn.",
+    price: 36.99,
+    image: unicorn,
+    rating: 5,
+    category: "Dolls",
+    collection: "princess",
+  },
+
+  /* ---------------- New Arrivals ---------------- */
+  {
+    id: "p40",
+    name: "Wooden Balance Board",
+    description: "Rock, bridge and slide — one board, many games.",
+    price: 58.0,
+    image: sports,
+    rating: 5,
+    category: "Sports & Outdoor",
+    collection: "new",
+  },
+  {
+    id: "p41",
+    name: "Soft Story Cubes",
+    description: "Fabric blocks that tell a tale as you stack them.",
+    price: 21.5,
+    image: baby,
+    rating: 5,
+    category: "Baby & Toddler",
+    collection: "new",
+  },
+  {
+    id: "p42",
+    name: "Junior Keyboard",
+    description: "Twenty-four keys and a built-in demo songbook.",
+    price: 46.0,
+    image: musical,
+    rating: 4,
+    category: "Educational",
+    collection: "new",
+  },
+  {
+    id: "p43",
+    name: "Safari Puzzle Mat",
+    description: "Foam tiles that snap into a jungle play floor.",
+    price: 33.25,
+    image: animals,
+    rating: 5,
+    category: "Animals",
+    collection: "new",
+  },
+  {
+    id: "p44",
+    name: "Sketch & Trace Desk",
+    description: "A light-up desk for tracing favourite drawings.",
+    price: 39.0,
+    image: art,
+    rating: 4,
+    category: "Educational",
+    collection: "new",
+  },
+  {
+    id: "p45",
+    name: "Cuddle Cloud Bear",
+    description: "Extra-soft bear in a dreamy cloud-grey coat.",
+    price: 26.5,
+    image: teddy,
+    rating: 5,
+    category: "Plush Toys",
+    collection: "new",
+  },
 ];
+
+export type Collection = {
+  slug: string;
+  /** First half of the heading, rendered in solid text. */
+  title: string;
+  /** Second half, rendered with the pink→orange gradient. */
+  highlight: string;
+  eyebrow: string;
+  subtitle: string;
+};
+
+export const COLLECTIONS: Collection[] = [
+  {
+    slug: "trending",
+    title: "Trending",
+    highlight: "Toy",
+    eyebrow: "Hot Right Now",
+    subtitle: "The toys everyone is asking for this week.",
+  },
+  {
+    slug: "drones",
+    title: "Drone",
+    highlight: "Zone",
+    eyebrow: "Take Flight",
+    subtitle: "Little flyers with big adventures ahead.",
+  },
+  {
+    slug: "cars",
+    title: "Car",
+    highlight: "Mania",
+    eyebrow: "Start Your Engines",
+    subtitle: "Racers, trucks and tracks for speed lovers.",
+  },
+  {
+    slug: "princess",
+    title: "Little",
+    highlight: "Princess",
+    eyebrow: "Once Upon A Time",
+    subtitle: "Sparkle, twirl and reign over the playroom.",
+  },
+  {
+    slug: "new",
+    title: "New",
+    highlight: "Arrivals",
+    eyebrow: "Just Landed",
+    subtitle: "Fresh off the shelf and ready to play.",
+  },
+];
+
+export function getCollectionProducts(slug: string) {
+  return PRODUCTS.filter((p) => p.collection === slug);
+}

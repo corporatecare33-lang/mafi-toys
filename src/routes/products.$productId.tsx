@@ -23,7 +23,7 @@ import { ProductCard } from "@/components/toyspark/ProductCard";
 export const Route = createFileRoute("/products/$productId")({
   head: ({ params }) => {
     const product = PRODUCTS.find((p) => p.id === params.productId);
-    const title = product ? `${product.name} — Mafi Toys` : "Product — Mafi Toys";
+    const title = product ? `${product.name} — Toy Shop` : "Product — Toy Shop";
     const desc = product?.description || "View product details";
     return {
       meta: [

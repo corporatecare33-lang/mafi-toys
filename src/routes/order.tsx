@@ -12,15 +12,15 @@ import { Label } from "@/components/ui/label";
 import { useCart, type CartItem } from "@/context/cart-context";
 import { Navbar } from "@/components/toyspark/Navbar";
 import { Footer } from "@/components/toyspark/Footer";
-import logo from "@/assets/mafi-toys-logo.png";
+import logo from "@/assets/toy-shop-logo.png";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/order")({
   head: () => ({
     meta: [
-      { title: "Checkout — Mafi Toys" },
+      { title: "Checkout — Toy Shop" },
       { name: "description", content: "Place your order with cash on delivery." },
-      { property: "og:title", content: "Checkout — Mafi Toys" },
+      { property: "og:title", content: "Checkout — Toy Shop" },
       { property: "og:description", content: "Place your order with cash on delivery." },
     ],
   }),
@@ -141,7 +141,7 @@ function CheckoutForm({
 
   const onSubmit = async (data: CheckoutValues) => {
     await new Promise((r) => setTimeout(r, 600));
-    const invoiceNo = `MAFI-${Date.now().toString().slice(-8)}`;
+    const invoiceNo = `TOY-${Date.now().toString().slice(-8)}`;
     const order: PlacedOrder = {
       invoiceNo,
       date: new Date().toLocaleString(),
@@ -319,7 +319,7 @@ async function downloadInvoicePDF(order: PlacedOrder) {
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(22);
   doc.setFont("helvetica", "bold");
-  doc.text("MAFI TOYS", 14, 18);
+  doc.text("TOY SHOP", 14, 18);
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
   doc.text("Every Children's First Choice", 14, 24);
@@ -387,7 +387,7 @@ async function downloadInvoicePDF(order: PlacedOrder) {
   doc.setFont("helvetica", "italic");
   doc.setFontSize(10);
   doc.setTextColor(120, 120, 120);
-  doc.text("Thank you for shopping with Mafi Toys!", 14, 280);
+  doc.text("Thank you for shopping with Toy Shop!", 14, 280);
   doc.text("Bashundhara City, Level-1, Block-C, Shop-77, Dhaka · 01781-984427", 14, 286);
 
   doc.save(`${order.invoiceNo}.pdf`);
@@ -432,13 +432,13 @@ function ThankYou({ order }: { order: PlacedOrder }) {
             <div className="flex items-center gap-3">
               <img
                 src={logo}
-                alt="Mafi Toys"
+                alt="Toy Shop"
                 width={512}
                 height={512}
                 className="h-12 w-auto shrink-0 object-contain sm:h-14"
               />
               <div>
-                <div className="font-display text-xl font-bold">Mafi Toys</div>
+                <div className="font-display text-xl font-bold">Toy Shop</div>
                 <p className="text-xs text-foreground/60">
                   Bashundhara City, Level-1, Block-C, Shop-77
                 </p>

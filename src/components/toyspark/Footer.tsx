@@ -14,7 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { scrollToSection } from "@/lib/scroll";
-import logo from "@/assets/mafi-toys-logo.png";
+import logo from "@/assets/toy-shop-logo.png";
 
 const LINKS = [
   { id: "home", label: "Home" },
@@ -34,7 +34,7 @@ const PERKS = [
   {
     Icon: Truck,
     title: "Shipping all over Bangladesh",
-    desc: "Order from anywhere in Bangladesh and get your product delivered by Mafi Toys",
+    desc: "Order from anywhere in Bangladesh and get your product delivered by Toy Shop",
     iconStyle: "from-brand-pink-deep to-brand-red",
     glowStyle: "bg-brand-pink/40",
   },
@@ -100,7 +100,7 @@ export function Footer() {
       <div className="relative mx-auto max-w-7xl px-4 pt-14 md:px-8">
         <div className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/15 backdrop-blur sm:p-6 lg:flex lg:items-center lg:justify-between lg:p-8">
           <div className="max-w-md">
-            <h3 className="font-display text-2xl font-bold md:text-3xl">Join the Mafi family</h3>
+            <h3 className="font-display text-2xl font-bold md:text-3xl">Join the Toy Shop family</h3>
             <p className="mt-1 text-sm text-white/80">
               Get 10% off your first order plus new arrivals in your inbox.
             </p>
@@ -129,10 +129,10 @@ export function Footer() {
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-12 md:px-8">
         <div className="md:col-span-5">
           <div className="inline-flex items-center rounded-2xl bg-white/95 p-3 shadow-lg">
-            <img src={logo} alt="Mafi Toys" className="h-16 w-auto object-contain" />
+            <img src={logo} alt="Toy Shop" className="h-16 w-auto object-contain" />
           </div>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-white/80">
-            Mafi Toys is Bangladesh&rsquo;s magical destination for beautifully crafted, safe and
+            Toy Shop is Bangladesh&rsquo;s magical destination for beautifully crafted, safe and
             joyful toys — curated to spark imagination in every child.
           </p>
           <div className="mt-6 flex gap-3">
@@ -206,7 +206,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="relative border-t border-white/15 bg-black/10 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-center text-xs text-white/70 md:flex-row md:px-8 md:text-left">
-          <p>© {new Date().getFullYear()} Mafi Toys. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Toy Shop. All rights reserved.</p>
           <p>
             Design and Developed by{" "}
             <a
