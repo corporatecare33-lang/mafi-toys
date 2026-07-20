@@ -7,15 +7,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import slide1 from "@/assets/slider/s1.png";
-import slide2 from "@/assets/slider/s2.png";
+// Using only real product photos - removed promotional banners with external website links
 import slide3 from "@/assets/slider/s3.jpg";
-import slide4 from "@/assets/slider/s4.png";
-import slide5 from "@/assets/slider/s5.png";
 import slide6 from "@/assets/slider/s6.jpg";
-import slide7 from "@/assets/slider/s7.png";
 
-const SLIDES = [slide1, slide2, slide3, slide4, slide5, slide6, slide7];
+const SLIDES = [slide3, slide6];
 
 export function Hero() {
   const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }));
