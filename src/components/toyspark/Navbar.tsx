@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Heart, Menu, Search, ShoppingBag, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,8 @@ import { useSearch } from "@/context/search-context";
 import { scrollToSection } from "@/lib/scroll";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/mafi-toys-logo.png";
+import { PRODUCTS } from "./products-data";
+import type { Product } from "@/context/cart-context";
 
 const NAV = [
   { id: "home", label: "Home", route: "/" },
