@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Heart } from "lucide-react";
 import { useState } from "react";
@@ -60,13 +60,13 @@ function ProductsPage() {
       )
     : [...base];
 
-  // Filter by price range - convert USD prices to BDT (1 USD ≈ 120 BDT)
+  // Filter by price range (BDT)
   if (selectedPriceRange === "under20") {
-    filtered = filtered.filter((p) => p.price < 20);
+    filtered = filtered.filter((p) => p.price < 2000);
   } else if (selectedPriceRange === "20-40") {
-    filtered = filtered.filter((p) => p.price >= 20 && p.price <= 40);
+    filtered = filtered.filter((p) => p.price >= 2000 && p.price <= 5000);
   } else if (selectedPriceRange === "40plus") {
-    filtered = filtered.filter((p) => p.price > 40);
+    filtered = filtered.filter((p) => p.price > 5000);
   }
 
   // Filter by category
@@ -158,7 +158,7 @@ function ProductsPage() {
                         : "border-2 border-brand-pink/30 bg-white text-foreground hover:bg-brand-pink/10"
                     }`}
                   >
-                    Under $20
+                    Under ৳2,000
                   </button>
                   <button
                     onClick={() => setSelectedPriceRange("20-40")}
@@ -168,7 +168,7 @@ function ProductsPage() {
                         : "border-2 border-brand-pink/30 bg-white text-foreground hover:bg-brand-pink/10"
                     }`}
                   >
-                    $20 - $40
+                    ৳2,000 - ৳5,000
                   </button>
                   <button
                     onClick={() => setSelectedPriceRange("40plus")}
@@ -178,7 +178,7 @@ function ProductsPage() {
                         : "border-2 border-brand-pink/30 bg-white text-foreground hover:bg-brand-pink/10"
                     }`}
                   >
-                    $40+
+                    ৳5,000+
                   </button>
                 </div>
 
@@ -225,7 +225,7 @@ function ProductsPage() {
                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+                <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
                   {filtered.map((p, i) => (
                     <motion.div
                       key={p.id}

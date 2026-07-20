@@ -8,10 +8,13 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 // Using only real product photos - removed promotional banners with external website links
+import slide1 from "@/assets/slider/s1.png";
 import slide3 from "@/assets/slider/s3.jpg";
+import slide5 from "@/assets/slider/s5.png";
 import slide6 from "@/assets/slider/s6.jpg";
 
-const SLIDES = [slide3, slide6];
+// Ordered so the two Hot Wheels banners (s6, s5) never sit next to each other.
+const SLIDES = [slide3, slide6, slide1, slide5];
 
 export function Hero() {
   const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }));

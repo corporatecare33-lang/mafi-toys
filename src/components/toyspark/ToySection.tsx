@@ -32,7 +32,7 @@ export function ToySection({ collection }: { collection: Collection }) {
           <p className="mt-3 text-foreground/70">{collection.subtitle}</p>
         </motion.div>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-6 lg:grid-cols-4">
           {products.map((p, i) => (
             <motion.div
               key={p.id}

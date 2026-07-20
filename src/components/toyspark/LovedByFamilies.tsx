@@ -1,92 +1,19 @@
-import { motion } from "motion/react";
+﻿import { motion } from "motion/react";
 import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/context/cart-context";
+import { useCart, type Product } from "@/context/cart-context";
 import { toast } from "sonner";
+import { POPULAR_TOYS } from "./products-data";
 
-// Real product images from categories
-import buildingBlocks from "@/assets/categories/building.jpg";
-import dollsImg from "@/assets/categories/dolls.jpg";
-import plushImg from "@/assets/categories/plush.jpg";
-import vehiclesImg from "@/assets/categories/vehicles.jpg";
-import educationalImg from "@/assets/categories/educational.jpg";
-import animalsImg from "@/assets/categories/animals.jpg";
-import musicalImg from "@/assets/categories/musical.jpg";
-import actionImg from "@/assets/categories/action.jpg";
-
-const POPULAR_PRODUCTS = [
-  {
-    id: 1,
-    name: "Building Blocks Set",
-    price: "700.00",
-    image: buildingBlocks,
-    category: "Building & Construction",
-  },
-  {
-    id: 2,
-    name: "Building Block Insects",
-    price: "2,180.00",
-    image: educationalImg,
-    category: "Educational Toys",
-  },
-  {
-    id: 3,
-    name: "Building Block Cars",
-    price: "270.00",
-    image: vehiclesImg,
-    category: "Vehicles",
-  },
-  {
-    id: 4,
-    name: "Building Block Cars",
-    price: "270.00",
-    image: actionImg,
-    category: "Action Toys",
-  },
-  {
-    id: 5,
-    name: "Building Block Flowers",
-    price: "300.00",
-    image: dollsImg,
-    category: "Dolls & Accessories",
-  },
-  {
-    id: 6,
-    name: "Building Block Planes",
-    price: "2,960.00",
-    image: plushImg,
-    category: "Plush Toys",
-  },
-  {
-    id: 7,
-    name: "Building Block Planes",
-    price: "2,190.00",
-    image: musicalImg,
-    category: "Musical Instruments",
-  },
-  {
-    id: 8,
-    name: "Cartoon Building Blocks",
-    price: "290.00",
-    image: animalsImg,
-    category: "Animals & Nature",
-  },
-];
+const formatPrice = (price: number) =>
+  price.toLocaleString("en-US", { maximumFractionDigits: 0 });
 
 export function LovedByFamilies() {
   const { addItem } = useCart();
 
-  const handleAddToCart = (product: typeof POPULAR_PRODUCTS[0]) => {
-    addItem({
-      id: product.id.toString(),
-      name: product.name,
-      description: product.category,
-      price: parseFloat(product.price.replace(/,/g, '')),
-      image: product.image,
-      rating: 5,
-      category: product.category,
-    });
+  const handleAddToCart = (product: Product) => {
+    addItem(product);
     toast.success(`${product.name} added to cart!`);
   };
 
@@ -143,13 +70,13 @@ export function LovedByFamilies() {
                   All Prices
                 </button>
                 <button className="w-full rounded-full border-2 border-brand-pink/30 bg-white px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-brand-pink/10">
-                  Under $20
+                  Under ৳2,000
                 </button>
                 <button className="w-full rounded-full border-2 border-brand-pink/30 bg-white px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-brand-pink/10">
-                  $20 - $40
+                  ৳2,000 - ৳5,000
                 </button>
                 <button className="w-full rounded-full border-2 border-brand-pink/30 bg-white px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-brand-pink/10">
-                  $40+
+                  ৳5,000+
                 </button>
               </div>
 
@@ -170,8 +97,8 @@ export function LovedByFamilies() {
 
           {/* Right Side - Product Grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-              {POPULAR_PRODUCTS.map((product, i) => (
+            <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
+              {POPULAR_TOYS.map((product, i) => (
                 <motion.div
                   key={product.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -190,7 +117,12 @@ export function LovedByFamilies() {
                   </button>
 
                   {/* Image */}
-                  <Link to="/products" className="block">
+                  <Link
+                    to="/products/$productId"
+                    params={{ productId: product.id }}
+                    className="block"
+                    aria-label={`View ${product.name}`}
+                  >
                     <div className="relative aspect-square overflow-hidden bg-brand-pink/10">
                       <img
                         src={product.image}
@@ -203,7 +135,8 @@ export function LovedByFamilies() {
                   {/* Content */}
                   <div className="p-3 sm:p-4">
                     <Link
-                      to="/products"
+                      to="/products/$productId"
+                      params={{ productId: product.id }}
                       className="block text-sm font-semibold leading-tight hover:text-brand-pink-deep sm:text-base"
                     >
                       {product.name}
@@ -223,7 +156,7 @@ export function LovedByFamilies() {
                     {/* Price & Cart */}
                     <div className="mt-3 flex items-center justify-between gap-2">
                       <span className="font-display text-lg font-bold text-brand-pink-deep sm:text-xl">
-                        {product.price}
+                        {formatPrice(product.price)}
                         <span className="text-xs font-normal text-foreground/60">৳</span>
                       </span>
                       <Button

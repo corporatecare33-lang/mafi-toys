@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+﻿import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import {
   ArrowLeft,
@@ -14,15 +14,15 @@ import {
 import { useState } from "react";
 import { Navbar } from "@/components/toyspark/Navbar";
 import { Footer } from "@/components/toyspark/Footer";
-import { PRODUCTS } from "@/components/toyspark/products-data";
+import { ALL_PRODUCTS, findProductById } from "@/components/toyspark/products-data";
 import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { ProductCard } from "@/components/toyspark/ProductCard";
 
-export const Route = createFileRoute("/products/$productId")({
+export const Route = createFileRoute("/products_/$productId")({
   head: ({ params }) => {
-    const product = PRODUCTS.find((p) => p.id === params.productId);
+    const product = findProductById(params.productId);
     const title = product ? `${product.name} — Toy Shop` : "Product — Toy Shop";
     const desc = product?.description || "View product details";
     return {
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/products/$productId")({
 function ProductDetailPage() {
   const { productId } = Route.useParams();
   const navigate = useNavigate();
-  const product = PRODUCTS.find((p) => p.id === productId);
+  const product = findProductById(productId);
   const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -79,7 +79,19 @@ function ProductDetailPage() {
   };
 
   // Related products (excluding current)
-  const relatedProducts = PRODUCTS.filter((p) => p.id !== productId).slice(0, 3);
+  const sameCategory = ALL_PRODUCTS.filter(
+    (p) => p.id !== productId && p.category === product.category,
+  );
+  const relatedProducts = (
+    sameCategory.length >= 3
+      ? sameCategory
+      : [
+          ...sameCategory,
+          ...ALL_PRODUCTS.filter(
+            (p) => p.id !== productId && p.category !== product.category,
+          ),
+        ]
+  ).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background font-body text-foreground">
@@ -158,7 +170,7 @@ function ProductDetailPage() {
               {/* Price */}
               <div className="mt-6 flex items-baseline gap-3">
                 <span className="font-display text-4xl font-bold text-brand-pink-deep">
-                  ${product.price.toFixed(2)}
+                  ৳{product.price.toFixed(0)}
                 </span>
                 <span className="text-sm text-foreground/60">In stock</span>
               </div>
@@ -207,7 +219,7 @@ function ProductDetailPage() {
 
               {/* Features */}
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                <Feature icon={Truck} title="Free Delivery" desc="Over $100" />
+                <Feature icon={Truck} title="Free Delivery" desc="Over ৳5,000" />
                 <Feature icon={ShieldCheck} title="Authentic" desc="Guaranteed" />
                 <Feature icon={RotateCcw} title="Easy Returns" desc="7 days" />
               </div>
@@ -226,7 +238,7 @@ function ProductDetailPage() {
               <h2 className="mb-8 text-center font-display text-3xl font-bold">
                 You Might Also <span className="gradient-text">Like</span>
               </h2>
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
+              <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3">
                 {relatedProducts.map((p) => (
                   <ProductCard key={p.id} product={p} />
                 ))}

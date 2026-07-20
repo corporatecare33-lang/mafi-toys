@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+﻿import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "motion/react";
@@ -41,7 +41,7 @@ export function Contact() {
     await new Promise((r) => setTimeout(r, 700));
     if (items.length > 0) {
       toast.success("Order placed! 🎉", {
-        description: `Thanks ${data.name}! Total $${subtotal.toFixed(2)} — confirmation sent to ${data.email}.`,
+        description: `Thanks ${data.name}! Total ৳${subtotal.toFixed(0)} — confirmation sent to ${data.email}.`,
       });
       clear();
     } else {
@@ -193,7 +193,7 @@ export function Contact() {
                       </p>
                     </div>
                     <div className="text-lg font-bold text-brand-pink-deep">
-                      ${subtotal.toFixed(2)}
+                      ৳{subtotal.toFixed(0)}
                     </div>
                   </div>
                 )}

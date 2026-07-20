@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Star, ShoppingCart, Eye, Check, Loader2 } from "lucide-react";
@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
     clearTimeout(addedTimer.current);
     addedTimer.current = setTimeout(() => setAdded(false), 1500);
     toast.success(`${product.name} added to cart`, {
-      description: `$${product.price.toFixed(2)}`,
+      description: `৳${product.price.toFixed(0)}`,
     });
   };
 
@@ -62,29 +62,29 @@ export function ProductCard({ product }: { product: Product }) {
           </span>
         </div>
       </Link>
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className="flex flex-1 flex-col gap-2 p-3 sm:gap-3 sm:p-5">
         <div className="flex items-center gap-1">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}
-              className={`h-4 w-4 ${i < product.rating ? "fill-brand-orange text-brand-orange" : "text-muted"}`}
+              className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${i < product.rating ? "fill-brand-orange text-brand-orange" : "text-muted"}`}
             />
           ))}
         </div>
         <Link
           to="/products/$productId"
           params={{ productId: product.id }}
-          className="font-display text-xl font-semibold hover:text-brand-pink-deep transition-colors"
+          className="font-display text-base font-semibold hover:text-brand-pink-deep transition-colors sm:text-xl"
         >
           {product.name}
         </Link>
-        <p className="text-sm text-foreground/70 line-clamp-2">{product.description}</p>
-        <div className="mt-auto flex items-center justify-between pt-2">
-          <span className="font-display text-2xl font-bold text-brand-pink-deep">
-            ${product.price.toFixed(2)}
+        <p className="text-xs text-foreground/70 line-clamp-2 sm:text-sm">{product.description}</p>
+        <div className="mt-auto flex items-center justify-between pt-1 sm:pt-2">
+          <span className="font-display text-lg font-bold text-brand-pink-deep sm:text-2xl">
+            ৳{product.price.toFixed(0)}
           </span>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row">
           <Button
             onClick={handleAddToCart}
             variant="outline"

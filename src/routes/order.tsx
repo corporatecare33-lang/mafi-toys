@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+﻿import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/order")({
 function OrderPage() {
   const { items, subtotal, clear } = useCart();
   const navigate = useNavigate();
-  const shipping = subtotal > 0 && subtotal < 100 ? 8 : 0;
+  const shipping = subtotal > 0 && subtotal < 5000 ? 120 : 0;
   const total = subtotal + shipping;
   const [order, setOrder] = useState<PlacedOrder | null>(null);
 
@@ -194,7 +194,7 @@ function CheckoutForm({
                 <CheckCircle2 className="h-3.5 w-3.5" /> Inspect before paying
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="h-3.5 w-3.5" /> Free delivery over $100
+                <CheckCircle2 className="h-3.5 w-3.5" /> Free delivery over ৳5,000
               </li>
             </ul>
           </div>
@@ -202,17 +202,17 @@ function CheckoutForm({
           <div className="mt-8 rounded-2xl bg-white/10 p-4 text-sm ring-1 ring-white/20">
             <div className="flex justify-between">
               <span className="text-white/80">Subtotal</span>
-              <span className="font-semibold">${subtotal.toFixed(2)}</span>
+              <span className="font-semibold">৳{subtotal.toFixed(0)}</span>
             </div>
             <div className="mt-1 flex justify-between">
               <span className="text-white/80">Shipping</span>
               <span className="font-semibold">
-                {shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}
+                {shipping === 0 ? "FREE" : `৳${shipping.toFixed(0)}`}
               </span>
             </div>
             <div className="mt-3 flex items-baseline justify-between border-t border-white/20 pt-3">
               <span className="font-bold">Total</span>
-              <span className="font-display text-2xl font-bold">${total.toFixed(2)}</span>
+              <span className="font-display text-2xl font-bold">৳{total.toFixed(0)}</span>
             </div>
           </div>
         </aside>
@@ -277,7 +277,7 @@ function CheckoutForm({
             disabled={isSubmitting}
             className="mt-6 h-14 w-full rounded-full bg-gradient-to-r from-brand-pink-deep via-brand-orange to-brand-red text-base font-bold text-white shadow-toy hover:brightness-105"
           >
-            {isSubmitting ? "Placing order…" : `Place Order · $${total.toFixed(2)}`}
+            {isSubmitting ? "Placing order…" : `Place Order · ৳${total.toFixed(0)}`}
           </Button>
           <p className="mt-3 text-center text-xs text-foreground/60">
             By placing this order you agree to our friendly terms. 💕
@@ -353,8 +353,8 @@ async function downloadInvoicePDF(order: PlacedOrder) {
       String(i + 1),
       it.name,
       String(it.quantity),
-      `$${it.price.toFixed(2)}`,
-      `$${(it.price * it.quantity).toFixed(2)}`,
+      `৳${it.price.toFixed(0)}`,
+      `৳${(it.price * it.quantity).toFixed(0)}`,
     ]),
     headStyles: { fillColor: [236, 72, 153], textColor: 255, fontStyle: "bold" },
     styles: { fontSize: 10, cellPadding: 3 },
@@ -371,9 +371,9 @@ async function downloadInvoicePDF(order: PlacedOrder) {
   doc.setFontSize(11);
   doc.setFont("helvetica", "normal");
   doc.text("Subtotal:", 140, finalY);
-  doc.text(`$${order.subtotal.toFixed(2)}`, 195, finalY, { align: "right" });
+  doc.text(`৳${order.subtotal.toFixed(0)}`, 195, finalY, { align: "right" });
   doc.text("Shipping:", 140, finalY + 6);
-  doc.text(order.shipping === 0 ? "FREE" : `$${order.shipping.toFixed(2)}`, 195, finalY + 6, {
+  doc.text(order.shipping === 0 ? "FREE" : `৳${order.shipping.toFixed(0)}`, 195, finalY + 6, {
     align: "right",
   });
   doc.setDrawColor(236, 72, 153);
@@ -381,7 +381,7 @@ async function downloadInvoicePDF(order: PlacedOrder) {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(13);
   doc.text("TOTAL:", 140, finalY + 17);
-  doc.text(`$${order.total.toFixed(2)}`, 195, finalY + 17, { align: "right" });
+  doc.text(`৳${order.total.toFixed(0)}`, 195, finalY + 17, { align: "right" });
 
   // Footer
   doc.setFont("helvetica", "italic");
@@ -499,9 +499,9 @@ function ThankYou({ order }: { order: PlacedOrder }) {
                       </div>
                     </td>
                     <td className="px-4 py-3 text-center">{it.quantity}</td>
-                    <td className="px-4 py-3 text-right">${it.price.toFixed(2)}</td>
+                    <td className="px-4 py-3 text-right">৳{it.price.toFixed(0)}</td>
                     <td className="px-4 py-3 text-right font-semibold">
-                      ${(it.price * it.quantity).toFixed(2)}
+                      ৳{(it.price * it.quantity).toFixed(0)}
                     </td>
                   </tr>
                 ))}
@@ -513,19 +513,19 @@ function ThankYou({ order }: { order: PlacedOrder }) {
           <div className="mt-6 ml-auto w-full max-w-sm space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-foreground/70">Subtotal</span>
-              <span className="font-semibold">${order.subtotal.toFixed(2)}</span>
+              <span className="font-semibold">৳{order.subtotal.toFixed(0)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-foreground/70">Shipping</span>
               <span className="font-semibold">
-                {order.shipping === 0 ? "FREE" : `$${order.shipping.toFixed(2)}`}
+                {order.shipping === 0 ? "FREE" : `৳${order.shipping.toFixed(0)}`}
               </span>
             </div>
             <div className="my-2 border-t border-dashed border-brand-pink/60" />
             <div className="flex items-baseline justify-between">
               <span className="font-bold">Total</span>
               <span className="font-display text-3xl font-bold text-brand-pink-deep">
-                ${order.total.toFixed(2)}
+                ৳{order.total.toFixed(0)}
               </span>
             </div>
           </div>

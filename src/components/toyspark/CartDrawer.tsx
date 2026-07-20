@@ -1,4 +1,4 @@
-import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+﻿import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -61,7 +61,7 @@ export function CartDrawer() {
                         <Trash2 className="h-4 w-4" />
                       </button>
                     </div>
-                    <span className="text-sm text-brand-pink-deep">${item.price.toFixed(2)}</span>
+                    <span className="text-sm text-brand-pink-deep">৳{item.price.toFixed(0)}</span>
                     <div className="mt-auto flex items-center justify-between">
                       <div className="flex items-center gap-1 rounded-full border bg-white p-0.5">
                         <button
@@ -83,7 +83,7 @@ export function CartDrawer() {
                         </button>
                       </div>
                       <span className="font-semibold">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ৳{(item.price * item.quantity).toFixed(0)}
                       </span>
                     </div>
                   </div>
@@ -97,7 +97,7 @@ export function CartDrawer() {
           <div className="border-t bg-white p-5">
             <div className="mb-3 flex items-center justify-between">
               <span className="text-sm text-foreground/70">Subtotal</span>
-              <span className="font-display text-2xl font-bold">${subtotal.toFixed(2)}</span>
+              <span className="font-display text-2xl font-bold">৳{subtotal.toFixed(0)}</span>
             </div>
             <Button
               onClick={checkout}

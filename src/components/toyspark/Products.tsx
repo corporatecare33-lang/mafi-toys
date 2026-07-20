@@ -37,7 +37,7 @@ export function Products() {
             No toys match "{query}". Try another search.
           </p>
         ) : (
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-6 lg:grid-cols-3">
             {filtered.map((p, i) => (
               <motion.div
                 key={p.id}

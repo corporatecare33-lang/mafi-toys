@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { Heart, Menu, Search, ShoppingBag, Sparkles, X } from "lucide-react";
@@ -9,7 +9,7 @@ import { useSearch } from "@/context/search-context";
 import { scrollToSection } from "@/lib/scroll";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/toyshop_logo.jpg";
-import { PRODUCTS } from "./products-data";
+import { ALL_PRODUCTS } from "./products-data";
 import type { Product } from "@/context/cart-context";
 
 const NAV = [
@@ -73,7 +73,7 @@ export function Navbar() {
 
     // Simulate AJAX delay
     const timer = setTimeout(() => {
-      const filtered = PRODUCTS.filter((product) => 
+      const filtered = ALL_PRODUCTS.filter((product) =>
         product.name.toLowerCase().includes(trimmed) ||
         product.description.toLowerCase().includes(trimmed) ||
         product.category.toLowerCase().includes(trimmed)
@@ -139,7 +139,7 @@ export function Navbar() {
   const handleSuggestionClick = (product: Product) => {
     setQuery(product.name);
     setShowSuggestions(false);
-    void navigate({ to: "/products" });
+    void navigate({ to: "/products/$productId", params: { productId: product.id } });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -269,7 +269,7 @@ export function Navbar() {
                             {product.name}
                           </p>
                           <p className="text-xs text-foreground/60 truncate">
-                            {product.category} • ${product.price}
+                            {product.category} • ৳{product.price}
                           </p>
                         </div>
                         <Search className="h-4 w-4 text-brand-pink-deep opacity-50" />
@@ -388,7 +388,7 @@ export function Navbar() {
                             {product.name}
                           </p>
                           <p className="text-xs text-foreground/60 truncate">
-                            {product.category} • ${product.price}
+                            {product.category} • ৳{product.price}
                           </p>
                         </div>
                       </button>

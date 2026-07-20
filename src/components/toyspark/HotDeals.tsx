@@ -1,92 +1,19 @@
-import { motion } from "motion/react";
+﻿import { motion } from "motion/react";
 import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/context/cart-context";
+import { useCart, type Product } from "@/context/cart-context";
 import { toast } from "sonner";
+import { HOT_DEALS } from "./products-data";
 
-// Real product images from categories
-import buildingBlocks from "@/assets/categories/building.jpg";
-import dollsImg from "@/assets/categories/dolls.jpg";
-import plushImg from "@/assets/categories/plush.jpg";
-import vehiclesImg from "@/assets/categories/vehicles.jpg";
-import educationalImg from "@/assets/categories/educational.jpg";
-import animalsImg from "@/assets/categories/animals.jpg";
-import musicalImg from "@/assets/categories/musical.jpg";
-import actionImg from "@/assets/categories/action.jpg";
-
-const HOT_PRODUCTS = [
-  {
-    id: 101,
-    name: "Stacks of squares",
-    price: "700.00",
-    image: buildingBlocks,
-    category: "Building & Construction",
-  },
-  {
-    id: 102,
-    name: "Building block insects",
-    price: "2,180.00",
-    image: educationalImg,
-    category: "Educational Toys",
-  },
-  {
-    id: 103,
-    name: "Building block cars",
-    price: "270.00",
-    image: vehiclesImg,
-    category: "Vehicles",
-  },
-  {
-    id: 104,
-    name: "Building block cars",
-    price: "270.00",
-    image: actionImg,
-    category: "Action Toys",
-  },
-  {
-    id: 105,
-    name: "Building block flowers",
-    price: "300.00",
-    image: dollsImg,
-    category: "Dolls & Accessories",
-  },
-  {
-    id: 106,
-    name: "Building block planes",
-    price: "2,960.00",
-    image: plushImg,
-    category: "Plush Toys",
-  },
-  {
-    id: 107,
-    name: "Building block planes",
-    price: "2,190.00",
-    image: musicalImg,
-    category: "Musical Instruments",
-  },
-  {
-    id: 108,
-    name: "Cartoon building blocks",
-    price: "290.00",
-    image: animalsImg,
-    category: "Animals & Nature",
-  },
-];
+const formatPrice = (price: number) =>
+  price.toLocaleString("en-US", { maximumFractionDigits: 0 });
 
 export function HotDeals() {
   const { addItem } = useCart();
 
-  const handleAddToCart = (product: typeof HOT_PRODUCTS[0]) => {
-    addItem({
-      id: product.id.toString(),
-      name: product.name,
-      description: product.category,
-      price: parseFloat(product.price.replace(/,/g, "")),
-      image: product.image,
-      rating: 5,
-      category: product.category,
-    });
+  const handleAddToCart = (product: Product) => {
+    addItem(product);
     toast.success(`${product.name} added to cart!`);
   };
 
@@ -132,7 +59,7 @@ export function HotDeals() {
 
         {/* Product Grid */}
         <div className="mt-6 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
-          {HOT_PRODUCTS.map((product, i) => (
+          {HOT_DEALS.map((product, i) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 20 }}
@@ -151,7 +78,12 @@ export function HotDeals() {
               </button>
 
               {/* Image */}
-              <Link to="/products" className="block">
+              <Link
+                to="/products/$productId"
+                params={{ productId: product.id }}
+                className="block"
+                aria-label={`View ${product.name}`}
+              >
                 <div className="relative aspect-square overflow-hidden bg-brand-pink/10">
                   <img
                     src={product.image}
@@ -164,7 +96,8 @@ export function HotDeals() {
               {/* Content */}
               <div className="p-3 sm:p-4">
                 <Link
-                  to="/products"
+                  to="/products/$productId"
+                  params={{ productId: product.id }}
                   className="block text-sm font-semibold leading-tight hover:text-brand-pink-deep sm:text-base"
                 >
                   {product.name}
@@ -184,7 +117,7 @@ export function HotDeals() {
                 {/* Price & Cart */}
                 <div className="mt-3 flex items-center justify-between gap-2">
                   <span className="font-display text-lg font-bold text-brand-pink-deep sm:text-xl">
-                    {product.price}
+                    {formatPrice(product.price)}
                     <span className="text-xs font-normal text-foreground/60">৳</span>
                   </span>
                   <Button

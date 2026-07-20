@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowLeft,
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const { items, subtotal, updateQty, removeItem, clear } = useCart();
-  const shipping = subtotal > 0 && subtotal < 100 ? 8 : 0;
+  const shipping = subtotal > 0 && subtotal < 5000 ? 120 : 0;
   const total = subtotal + shipping;
 
   return (
@@ -141,10 +141,10 @@ function CartPage() {
                           </div>
                           <div className="text-right">
                             <div className="text-xs text-foreground/50">
-                              ${item.price.toFixed(2)} each
+                              ৳{item.price.toFixed(0)} each
                             </div>
                             <div className="font-display text-xl font-bold text-brand-pink-deep">
-                              ${(item.price * item.quantity).toFixed(2)}
+                              ৳{(item.price * item.quantity).toFixed(0)}
                             </div>
                           </div>
                         </div>
@@ -158,7 +158,7 @@ function CartPage() {
                   <Perk
                     icon={Truck}
                     title="Free Delivery"
-                    sub="Inside Dhaka over $100"
+                    sub="Inside Dhaka over ৳5,000"
                     tone="pink"
                   />
                   <Perk
@@ -192,17 +192,17 @@ function CartPage() {
                   </div>
 
                   <div className="space-y-3 p-5">
-                    <Row label="Subtotal" value={`$${subtotal.toFixed(2)}`} />
+                    <Row label="Subtotal" value={`৳${subtotal.toFixed(0)}`} />
                     <Row
                       label="Shipping"
-                      value={shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}
+                      value={shipping === 0 ? "FREE" : `৳${shipping.toFixed(0)}`}
                       accent={shipping === 0}
                     />
                     <div className="my-2 border-t border-dashed border-brand-pink/60" />
                     <div className="flex items-baseline justify-between">
                       <span className="font-semibold">Total</span>
                       <span className="font-display text-3xl font-bold text-brand-pink-deep">
-                        ${total.toFixed(2)}
+                        ৳{total.toFixed(0)}
                       </span>
                     </div>
 
