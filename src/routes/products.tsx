@@ -229,6 +229,7 @@ function ProductsPage() {
                   {filtered.map((p, i) => (
                     <motion.div
                       key={p.id}
+                      className="h-full"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: i * 0.05 }}

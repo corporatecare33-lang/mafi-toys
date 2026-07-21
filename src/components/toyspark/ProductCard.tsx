@@ -38,7 +38,7 @@ export function ProductCard({ product }: { product: Product }) {
     <motion.article
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 250, damping: 20 }}
-      className="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-md transition-shadow hover:shadow-toy"
+      className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-md transition-shadow hover:shadow-toy"
     >
       <Link
         to="/products/$productId"

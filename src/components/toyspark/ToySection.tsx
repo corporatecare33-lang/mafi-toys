@@ -36,6 +36,7 @@ export function ToySection({ collection }: { collection: Collection }) {
           {products.map((p, i) => (
             <motion.div
               key={p.id}
+              className="h-full"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
